@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="LadderGameApp.LadderControls.LadderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LadderGameApp.LadderControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="200">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Background" Value="AliceBlue" />
+                <Setter Property="Width" Value="80" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="BorderBrush" Value="black" />
+            </Style>
+            <Style TargetType="Line">
+                <Setter Property="Stroke" Value="Black" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Y2" Value="270" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Grid.Row" Value="1" />
+            </Style>
+        </Grid.Resources>
+        <TextBox />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <local:StaticLadder Grid.Row="0" />
+            <local:StaticLadder Grid.Row="9" />
+
+        </Grid>
+        <Line />
+        
+        <TextBox Grid.Row="2" />
+    </Grid>
+</UserControl>
