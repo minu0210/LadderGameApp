@@ -23,6 +23,8 @@ namespace LadderGameApp.LadderControls
         public LadderControl()
         {
             InitializeComponent();
+
+
         }
     }
 }

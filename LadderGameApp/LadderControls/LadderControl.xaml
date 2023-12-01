@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LadderGameApp.LadderControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="200">
+             d:DesignHeight="300" d:DesignWidth="100">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -31,24 +31,8 @@
             </Style>
         </Grid.Resources>
         <TextBox />
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-
-            <local:StaticLadder Grid.Row="0" />
-            <local:StaticLadder Grid.Row="9" />
-
-        </Grid>
+        <StackPanel x:Name="LadderControlStackPanel" Grid.Row="1">
+        </StackPanel>
         <Line />
         
         <TextBox Grid.Row="2" />

@@ -28,8 +28,8 @@ namespace LadderGameApp
         {
             InitializeComponent();
 
-            Ladder.CreateVerticalLadder(user.Count, GameGrid, GameStackPanel);
-            Ladder.CreateHorizontalLadder();
+            Ladder.CreateVerticalLadder(user.Count, GameLadderPanel, GameButtonPanel);
+            /*Ladder.CreateHorizontalLadder();*/
 
             Goal.CheckGoal();
 
@@ -48,6 +48,7 @@ namespace LadderGameApp
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+            Ladder.LadderTypeCount = new int[10];
         }
 
 
