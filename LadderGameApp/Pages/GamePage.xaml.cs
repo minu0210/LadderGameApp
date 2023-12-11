@@ -16,8 +16,10 @@ namespace LadderGameApp
     public partial class GamePage : Page
     {
         private static bool isStarted = false;
+        private static bool animationNowPainting = false;
 
         public static bool IsStarted { get => isStarted; set => isStarted = value; }
+        public static bool AnimationNowPainting { get => animationNowPainting; set => animationNowPainting = value; }
 
         public GamePage(UserInput userInput)
         {
@@ -49,11 +51,12 @@ namespace LadderGameApp
 
         private async void StartPaintLadderPath(LadderControl.NameBoxMouseDownEventArgs e)
         {
-            if (IsStarted)
+            // 게임이 시작되었으며 애니메이션이 진행중이지 않으면 실행
+            if (IsStarted && !animationNowPainting)
             {
                 Painter painter = new Painter();
                 LineCanvas.Children.Clear();
-
+                animationNowPainting = true;
                 foreach (var line in painter.PaintLadderPath(e.Index))
                 {
                     PaintLadderPathAnimation(line);
@@ -61,6 +64,7 @@ namespace LadderGameApp
 
                     await Task.Delay(400);
                 }
+                animationNowPainting = false;
             }
         }
 
@@ -70,7 +74,6 @@ namespace LadderGameApp
             {
                 From = line.X1,
                 To = line.X2,
-
                 Duration = TimeSpan.FromMilliseconds(400)
             };
 
@@ -78,7 +81,6 @@ namespace LadderGameApp
             {
                 From = line.Y1,
                 To = line.Y2,
-
                 Duration = TimeSpan.FromMilliseconds(400)
             };
 
