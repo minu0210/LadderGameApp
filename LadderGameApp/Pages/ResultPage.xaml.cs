@@ -1,19 +1,7 @@
 ﻿using LadderGameApp.Classes;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LadderGameApp
 {
@@ -32,11 +20,10 @@ namespace LadderGameApp
         private void PrintResult()
         {
             // 결과화면 세팅
-
             for(int i=0; i<GameCalculator.AllResult.Length; i++)
             {
                 ListBoxItem listBoxItem = new ListBoxItem();
-                listBoxItem.Content = $"{i} => {GameCalculator.AllResult[i]}";
+                listBoxItem.Content = $"{LadderControls.LadderControl.NameList[i]} => {LadderControls.LadderControl.ResultList[GameCalculator.AllResult[i]]}";
 
                 ResultList.Items.Add(listBoxItem);
 

@@ -31,7 +31,7 @@
             </Style>
         </Grid.Resources>
 
-        <TextBox x:Name="NameBox" PreviewMouseLeftButtonDown="NameBox_PreviewMouseLeftButtonDown" TextChanged="TextBox_TextChanged"  />
+        <TextBox x:Name="NameBox" />
 
         <Grid x:Name="LadderControlGrid" Grid.Row="1">
             <Grid.RowDefinitions>

@@ -1,10 +1,4 @@
-﻿using LadderGameApp.LadderControls;
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Security.Cryptography.Xml;
-using System.Windows.Controls;
-using System.Windows.Ink;
+﻿using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;

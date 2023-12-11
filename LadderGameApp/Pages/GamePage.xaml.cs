@@ -1,16 +1,12 @@
 ﻿using LadderGameApp.Classes;
 using LadderGameApp.LadderControls;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LadderGameApp
 {
@@ -23,37 +19,43 @@ namespace LadderGameApp
 
         public static bool IsStarted { get => isStarted; set => isStarted = value; }
 
-        public GamePage(User user)
+        public GamePage(UserInput user)
         {
             InitializeComponent();
 
+            // user.Count만큼 사다리 구성
             Ladder ladder = new Ladder();
             foreach (var current in ladder.CreateLadders(user.Count))
             {
                 current.NameBoxMouseDown += Current_NameBoxMouseDown;
                 GameLadderPanel.Children.Add(current);
             }
-            GameLadderPanel.Children[^1].RenderSize = new Size(100, 297);
-
-            Goal.CheckGoal();
 
             GameCalculator gameCalculator = new GameCalculator();
             gameCalculator.AllCalc(user);
 
+            // 커서 클릭 위치 좌표 구하기
             // PreviewMouseLeftButtonDown += Window_PreviewMouseLeftButtonDown;
         }
 
-        private void Current_NameBoxMouseDown(object? sender, NameBoxMouseDownEventArgs e)
+        private void Current_NameBoxMouseDown(object? sender, LadderControl.NameBoxMouseDownEventArgs e)
         {
-            // 그리기
+            PaintLadderPath(e);
+        }
+
+        private async void PaintLadderPath(LadderControl.NameBoxMouseDownEventArgs e)
+        {
             if (IsStarted)
             {
                 Painter painter = new Painter();
                 LineCanvas.Children.Clear();
                 foreach (var line in painter.PaintLadder(e.Index))
                 {
-                    // PaintAnimation(line);
+                    PaintAnimation(line);
                     LineCanvas.Children.Add(line);
+
+                    await Task.Delay(500);
+
                 }
             }
         }
@@ -65,15 +67,15 @@ namespace LadderGameApp
                 From = line.X1,
                 To = line.X2,
 
-                Duration = TimeSpan.FromSeconds(.3)
+                Duration = TimeSpan.FromMilliseconds(500)
             };
             DoubleAnimation paintLadderYAnimation = new DoubleAnimation
             {
                 From = line.Y1,
                 To = line.Y2,
 
-                Duration = TimeSpan.FromSeconds(1)
-            };
+                Duration = TimeSpan.FromMilliseconds(500)
+        };
             line.BeginAnimation(Line.X2Property, paintLadderXAnimation);
             line.BeginAnimation(Line.Y2Property, paintLadderYAnimation);
 
@@ -82,12 +84,20 @@ namespace LadderGameApp
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            // LadderControl의 TextBox 체크
+            LadderControls.LadderControl.CheckTextBoxContent.Clear();
+            foreach (var child in GameLadderPanel.Children)
+            {
+                ((LadderControls.LadderControl)child).CheckTextBox();
+            }
 
-            if (LadderControl.IsFull)
+
+            // LadderControl의 모든 TextBox가 null 또는 whitespace가 아닐 경우 실행
+            if (!LadderControls.LadderControl.CheckTextBoxContent.Contains(false))
             {
                 foreach (var child in GameLadderPanel.Children)
                 {
-                    ((LadderControl)child).StartGame();
+                    ((LadderControls.LadderControl)child).StartGame();
                 }
 
                 Square.Visibility = Visibility.Collapsed;
@@ -105,9 +115,11 @@ namespace LadderGameApp
 
             foreach (var child in GameLadderPanel.Children)
             {
-                ((LadderControl)child).LeaveGame();
+                ((LadderControls.LadderControl)child).LeaveGame();
             }
 
+            LadderControls.LadderControl.NameList.Clear();
+            LadderControls.LadderControl.ResultList.Clear();
         }
 
 

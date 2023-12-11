@@ -1,7 +1,4 @@
-﻿
-using System.Diagnostics;
-
-namespace LadderGameApp.Classes
+﻿namespace LadderGameApp.Classes
 {
     internal class GameCalculator
     {
@@ -35,7 +32,7 @@ namespace LadderGameApp.Classes
             return result;
         }
 
-        internal void AllCalc(User user)
+        internal void AllCalc(UserInput user)
         {
             int[] allResult = new int[user.Count];
 

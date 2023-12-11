@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using LadderGameApp.Classes;
 
 namespace LadderGameApp.LadderControls
 {
@@ -10,18 +8,27 @@ namespace LadderGameApp.LadderControls
     /// </summary>
     public partial class LadderControl : UserControl
     {
-        int index;
+        private int index;
+        private static List<string> nameList = new List<string>();
+        private static List<string> resultList = new List<string>();
 
-        private static bool isFull = true;
+        private static List<bool> checkTextBoxContent = new List<bool>();
 
-        public static bool IsFull { get => isFull; set => isFull = value; }
         public int Index { get => index; set => index = value; }
+        public static List<string> NameList { get => nameList; set => nameList = value; }
+        public static List<string> ResultList { get => resultList; set => resultList = value; }
+        public static List<bool> CheckTextBoxContent { get => checkTextBoxContent; set => checkTextBoxContent = value; }
 
         public LadderControl()
         {
             InitializeComponent();
 
+            NameBox.PreviewMouseLeftButtonDown += NameBox_PreviewMouseLeftButtonDown;
+            NameBox.TextChanged += TextBox_TextChanged;
+            ResultBox.TextChanged += TextBox_TextChanged;
+
         }
+
         internal void StartGame()
         {
             NameBox.IsReadOnly = true;
@@ -30,7 +37,8 @@ namespace LadderGameApp.LadderControls
 
             GamePage.IsStarted = true;
 
-            // IsFull = false;
+            NameList.Add(NameBox.Text);
+            ResultList.Add(ResultBox.Text);
 
         }
         internal void LeaveGame()
@@ -39,38 +47,35 @@ namespace LadderGameApp.LadderControls
             ResultBox.IsReadOnly = false;
 
             GamePage.IsStarted = false;
+
         }
-
-
-        public event EventHandler<NameBoxMouseDownEventArgs> NameBoxMouseDown;
+        internal void CheckTextBox()
+        {
+            CheckTextBoxContent.Add(string.IsNullOrWhiteSpace(NameBox.Text) ? false : true);
+        }
         private void NameBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NameBoxMouseDown(sender, new NameBoxMouseDownEventArgs(Index));
-
             if (GamePage.IsStarted)
             {
-                User user = new User();
-
-                user.SelectIndex = NameBox.TabIndex;
+                NameBoxMouseDown(sender, new NameBoxMouseDownEventArgs(Index));
             }
         }
-
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // GamePage.CheckTextBox();
+            TextBox textBox = (TextBox)sender;
+            textBox.MaxLength = 10;
         }
-    }
+        public event EventHandler<NameBoxMouseDownEventArgs> NameBoxMouseDown;
 
-    public class NameBoxMouseDownEventArgs : EventArgs
-    {
-        private int index;
-
-        public NameBoxMouseDownEventArgs(int index)
+        public class NameBoxMouseDownEventArgs : EventArgs
         {
-            this.Index = index;
-        }
+            private int index;
 
-        public int Index { get => index; set => index = value; }
+            public NameBoxMouseDownEventArgs(int index)
+            {
+                this.Index = index;
+            }
+            public int Index { get => index; set => index = value; }
+        }
     }
 }

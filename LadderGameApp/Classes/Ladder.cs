@@ -43,7 +43,6 @@ namespace LadderGameApp.Classes
                 if(ladderIndex == ladderCount-1)
                 {
                     ladderItem.Margin = new Thickness(10, 0, 10, 0);
-                    Debug.WriteLine("execute");
                 }
 
             }

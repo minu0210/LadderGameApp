@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LadderGameApp.Classes;
 
 namespace LadderGameApp
@@ -29,27 +15,27 @@ namespace LadderGameApp
 
             InitializeComponent();
 
-            DataContext = new User();
+            DataContext = new UserInput();
 
 
         }
         private void MoveGamePageBtn_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.MovePage(NavigationService, new GamePage((User)DataContext));
+            Navigator.MovePage(NavigationService, new GamePage((UserInput)DataContext));
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
-            if (((User)DataContext).Count <= 2) return;
-            ((User)DataContext).Count--;
-            UserCount.Text = ((User)DataContext).Count.ToString();
+            if (((UserInput)DataContext).Count <= 2) return;
+            ((UserInput)DataContext).Count--;
+            UserCount.Text = ((UserInput)DataContext).Count.ToString();
         }
 
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
-            if (((User)DataContext).Count >= 20) return;
-            ((User)DataContext).Count++;
-            UserCount.Text = ((User)DataContext).Count.ToString();
+            if (((UserInput)DataContext).Count >= 20) return;
+            ((UserInput)DataContext).Count++;
+            UserCount.Text = ((UserInput)DataContext).Count.ToString();
         }
 
 
