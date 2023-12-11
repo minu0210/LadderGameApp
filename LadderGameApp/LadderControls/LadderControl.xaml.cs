@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LadderGameApp.LadderControls
 {
@@ -26,14 +27,17 @@ namespace LadderGameApp.LadderControls
             NameBox.PreviewMouseLeftButtonDown += NameBox_PreviewMouseLeftButtonDown;
             NameBox.TextChanged += TextBox_TextChanged;
             ResultBox.TextChanged += TextBox_TextChanged;
-
         }
 
         internal void StartGame()
         {
             NameBox.IsReadOnly = true;
+            NameBox.BorderBrush = Brushes.LightSkyBlue;
+            NameBox.BorderThickness = new System.Windows.Thickness(2);
             NameBox.Cursor = Cursors.Hand;
+
             ResultBox.IsReadOnly = true;
+            ResultBox.Cursor = Cursors.Arrow;
 
             GamePage.IsStarted = true;
 

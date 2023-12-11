@@ -2,21 +2,18 @@
 {
     public class UserInput : Model.MainModel
     {
-
-        private int count = 2;
+        private int ladderCount = 2;
         private int selectIndex;
 
-
-        public int Count
+        public int LadderCount
         {
-            get => count;
+            get => ladderCount;
             set
             {
-                if (count != value)
+                if (ladderCount != value)
                 {
-                    count = value;
-                    OnPropertyChanged("Count");
-
+                    ladderCount = value;
+                    OnPropertyChanged("LadderCount");
                 }
             }
         }

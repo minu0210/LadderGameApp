@@ -9,35 +9,48 @@ namespace LadderGameApp
     /// </summary>
     public partial class MainPage : Page
     {
-        
+
         public MainPage()
         {
-
             InitializeComponent();
 
             DataContext = new UserInput();
 
-
+            MinusButton.Click += MinusButton_Click;
+            PlusButton.Click += PlusButton_Click;
+            MoveGamePageButton.Click += MoveGamePageButton_Click;
         }
-        private void MoveGamePageBtn_Click(object sender, RoutedEventArgs e)
+        private void MoveGamePageButton_Click(object sender, RoutedEventArgs e)
         {
             Navigator.MovePage(NavigationService, new GamePage((UserInput)DataContext));
         }
 
-        private void Minus_Click(object sender, RoutedEventArgs e)
+        private void MinusButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((UserInput)DataContext).Count <= 2) return;
-            ((UserInput)DataContext).Count--;
-            UserCount.Text = ((UserInput)DataContext).Count.ToString();
+            if (((UserInput)DataContext).LadderCount <= 2)
+            {
+                MessageBox.Show("2 이상 20 이하의 수만 선택 가능합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            else
+            {
+                ((UserInput)DataContext).LadderCount--;
+                UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+            }
         }
 
-        private void Plus_Click(object sender, RoutedEventArgs e)
+        private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((UserInput)DataContext).Count >= 20) return;
-            ((UserInput)DataContext).Count++;
-            UserCount.Text = ((UserInput)DataContext).Count.ToString();
+            if (((UserInput)DataContext).LadderCount >= 20)
+            {
+                MessageBox.Show("2 이상 20 이하의 수만 선택 가능합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            else
+            {
+                ((UserInput)DataContext).LadderCount++;
+                UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+            }
         }
-
-
     }
 }

@@ -12,6 +12,7 @@
 
             for (int legIndex = 0; legIndex < ladderArray.GetLength(0); legIndex++)
             {
+                // 현재 요소가 R이면 selectIndex++;
                 if (ladderArray[legIndex, selectIndex] == LegType.R)
                 {
                     if (selectIndex <= ladderArray.GetLength(1))
@@ -19,6 +20,7 @@
                         selectIndex++;
                     }
                 }
+                // 현재 요소가 L이면 selectIndex--;
                 else if (ladderArray[legIndex, selectIndex] == LegType.L)
                 {
                     if (selectIndex <= ladderArray.GetLength(1))
@@ -32,11 +34,12 @@
             return result;
         }
 
-        internal void AllCalc(UserInput user)
+        // 전체 계산
+        internal void AllCalc(UserInput userInput)
         {
-            int[] allResult = new int[user.Count];
+            int[] allResult = new int[userInput.LadderCount];
 
-            for(int i = 0; i < user.Count; i++)
+            for(int i = 0; i < userInput.LadderCount; i++)
             {
                 allResult[i] = LadderCalc(i);
             }

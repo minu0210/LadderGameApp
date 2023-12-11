@@ -19,20 +19,24 @@ namespace LadderGameApp
 
         public static bool IsStarted { get => isStarted; set => isStarted = value; }
 
-        public GamePage(UserInput user)
+        public GamePage(UserInput userInput)
         {
             InitializeComponent();
 
             // user.Count만큼 사다리 구성
             Ladder ladder = new Ladder();
-            foreach (var current in ladder.CreateLadders(user.Count))
+            foreach (var current in ladder.CreateLadders(userInput.LadderCount))
             {
                 current.NameBoxMouseDown += Current_NameBoxMouseDown;
                 GameLadderPanel.Children.Add(current);
             }
 
             GameCalculator gameCalculator = new GameCalculator();
-            gameCalculator.AllCalc(user);
+            gameCalculator.AllCalc(userInput);
+
+            StartButton.Click += StartButton_Click;
+            ResultButton.Click += ResultButton_Click;
+            BackButton.Click += BackButton_Click;
 
             // 커서 클릭 위치 좌표 구하기
             // PreviewMouseLeftButtonDown += Window_PreviewMouseLeftButtonDown;
@@ -40,90 +44,90 @@ namespace LadderGameApp
 
         private void Current_NameBoxMouseDown(object? sender, LadderControl.NameBoxMouseDownEventArgs e)
         {
-            PaintLadderPath(e);
+            StartPaintLadderPath(e);
         }
 
-        private async void PaintLadderPath(LadderControl.NameBoxMouseDownEventArgs e)
+        private async void StartPaintLadderPath(LadderControl.NameBoxMouseDownEventArgs e)
         {
             if (IsStarted)
             {
                 Painter painter = new Painter();
                 LineCanvas.Children.Clear();
-                foreach (var line in painter.PaintLadder(e.Index))
+
+                foreach (var line in painter.PaintLadderPath(e.Index))
                 {
-                    PaintAnimation(line);
+                    PaintLadderPathAnimation(line);
                     LineCanvas.Children.Add(line);
 
-                    await Task.Delay(500);
-
+                    await Task.Delay(400);
                 }
             }
         }
 
-        private void PaintAnimation(Line line)
+        private void PaintLadderPathAnimation(Line line)
         {
             DoubleAnimation paintLadderXAnimation = new DoubleAnimation
             {
                 From = line.X1,
                 To = line.X2,
 
-                Duration = TimeSpan.FromMilliseconds(500)
+                Duration = TimeSpan.FromMilliseconds(400)
             };
+
             DoubleAnimation paintLadderYAnimation = new DoubleAnimation
             {
                 From = line.Y1,
                 To = line.Y2,
 
-                Duration = TimeSpan.FromMilliseconds(500)
-        };
+                Duration = TimeSpan.FromMilliseconds(400)
+            };
+
             line.BeginAnimation(Line.X2Property, paintLadderXAnimation);
             line.BeginAnimation(Line.Y2Property, paintLadderYAnimation);
-
         }
 
-
-        private void Start_Click(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             // LadderControl의 TextBox 체크
-            LadderControls.LadderControl.CheckTextBoxContent.Clear();
+            LadderControl.CheckTextBoxContent.Clear();
             foreach (var child in GameLadderPanel.Children)
             {
-                ((LadderControls.LadderControl)child).CheckTextBox();
+                ((LadderControl)child).CheckTextBox();
             }
 
-
-            // LadderControl의 모든 TextBox가 null 또는 whitespace가 아닐 경우 실행
-            if (!LadderControls.LadderControl.CheckTextBoxContent.Contains(false))
+            // LadderControl의 TextBox의 Text가 null 또는 whitespace가 존재할 경우 실행
+            if (LadderControl.CheckTextBoxContent.Contains(false))
+            {
+                MessageBox.Show("모든 입력창을 입력해야합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            else
             {
                 foreach (var child in GameLadderPanel.Children)
                 {
-                    ((LadderControls.LadderControl)child).StartGame();
+                    ((LadderControl)child).StartGame();
                 }
 
                 Square.Visibility = Visibility.Collapsed;
-                Result.Visibility = Visibility.Visible;
-                Start.Visibility = Visibility.Collapsed;
-
+                ResultButton.Visibility = Visibility.Visible;
+                StartButton.Visibility = Visibility.Collapsed;
             }
-
         }
 
-
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
 
             foreach (var child in GameLadderPanel.Children)
             {
-                ((LadderControls.LadderControl)child).LeaveGame();
+                ((LadderControl)child).LeaveGame();
             }
 
-            LadderControls.LadderControl.NameList.Clear();
-            LadderControls.LadderControl.ResultList.Clear();
+            LadderControl.NameList.Clear();
+            LadderControl.ResultList.Clear();
         }
 
-
-        private void Result_Click(object sender, RoutedEventArgs e)
+        private void ResultButton_Click(object sender, RoutedEventArgs e)
         {
             Navigator.MovePage(NavigationService, new ResultPage());
         }

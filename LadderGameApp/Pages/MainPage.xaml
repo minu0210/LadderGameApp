@@ -2,8 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LadderGameApp"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
@@ -16,7 +15,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="사다리타기" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button x:Name="Minus" Width="30" Height="30" Content="-" Click="Minus_Click">
+            <Button x:Name="MinusButton" Width="30" Height="30" Content="-">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20" />
@@ -25,9 +24,9 @@
                 </Button.Resources>
             </Button>
             <StackPanel Width="70" Margin="14,0,14,0">
-                <TextBlock x:Name="UserCount" Text="{Binding Count}" FontSize="60" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock x:Name="UserCount" Text="{Binding LadderCount}" FontSize="60" FontWeight="Bold" HorizontalAlignment="Center" />
             </StackPanel>
-            <Button x:Name="Plus" Width="30" Height="30" Content="+" Click="Plus_Click">
+            <Button x:Name="PlusButton" Width="30" Height="30" Content="+">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20" />
@@ -36,7 +35,6 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <Button x:Name="MoveGamePageBtn" Width="100" Height="30" Content="다음으로" Cursor="Hand" Grid.Row="2" Click="MoveGamePageBtn_Click" />
-
+        <Button x:Name="MoveGamePageButton" Width="100" Height="30" Content="다음으로" Cursor="Hand" Grid.Row="2" />
     </Grid>
 </Page>

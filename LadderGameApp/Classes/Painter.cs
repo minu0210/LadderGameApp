@@ -1,13 +1,11 @@
-﻿using System.Diagnostics;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+﻿using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace LadderGameApp.Classes
 {
     internal class Painter
     {
-        internal List<Line> PaintLadder(int index)
+        internal List<Line> PaintLadderPath(int index)
         {
             List<Line> lineList = new List<Line>();
 
@@ -101,30 +99,8 @@ namespace LadderGameApp.Classes
                     lineList.Add(line1);
                 }
             }
-            Debug.WriteLine(defaultX + ", " + defaultY);
 
             return lineList;
-        }
-
-        internal void PaintAnimation()
-        {
-            DoubleAnimation paintLadder = new DoubleAnimation();
-            paintLadder.From = 0.0;
-            paintLadder.To = 1.0;
-
-            paintLadder.AccelerationRatio = 1;
-            paintLadder.Duration = new System.Windows.Duration(TimeSpan.FromSeconds(1));
-
-            paintLadder.FillBehavior = FillBehavior.HoldEnd;
-            paintLadder.AutoReverse = false;
-            paintLadder.Completed += new EventHandler(PaintLadder_Completed);
-
-                        
-        }
-
-        private void PaintLadder_Completed(object? sender, EventArgs e)
-        {
-            
         }
     }
 }
