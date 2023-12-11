@@ -12,17 +12,22 @@
         <Grid x:Name="GameGrid" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*" />
-                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
 
-            <StackPanel x:Name="GameLadderPanel" Orientation="Horizontal" HorizontalAlignment="Center">
 
+            <StackPanel x:Name="GameLadderPanel" Orientation="Horizontal" HorizontalAlignment="Center">
             </StackPanel>
 
             <StackPanel x:Name="GameButtonPanel" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Button x:Name="Start" Width="100" Height="30" Content="사다리 시작" Margin="0,0,30,0" />
+                <Button x:Name="Start" Width="100" Height="30" Cursor="Hand" Content="사다리 시작" Margin="0,0,30,0" Click="Start_Click" />
+                <Button x:Name="Result" Visibility="Collapsed" Width="100" Height="30" Cursor="Hand" Content="결과 보기" Margin="0,0,30,0" Click="Result_Click" />
                 <Button x:Name="Back" Width="100" Height="30" Cursor="Hand" Content="뒤로가기" Click="Back_Click" />
             </StackPanel>
+
+            <Rectangle x:Name="Square" Height="170" Fill="White" />
+            <Canvas x:Name="LineCanvas">
+            </Canvas>
 
         </Grid>
     </ScrollViewer>

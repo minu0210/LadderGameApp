@@ -1,5 +1,4 @@
-﻿
-namespace LadderGameApp
+﻿namespace LadderGameApp.Classes
 {
     internal class Goal
     {

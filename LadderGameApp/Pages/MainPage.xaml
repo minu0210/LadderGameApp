@@ -24,7 +24,9 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <TextBlock x:Name="UserCount" Text="{Binding Count}" FontSize="60" FontWeight="Bold" Margin="30,0,30,0" />
+            <StackPanel Width="70" Margin="14,0,14,0">
+                <TextBlock x:Name="UserCount" Text="{Binding Count}" FontSize="60" FontWeight="Bold" HorizontalAlignment="Center" />
+            </StackPanel>
             <Button x:Name="Plus" Width="30" Height="30" Content="+" Click="Plus_Click">
                 <Button.Resources>
                     <Style TargetType="Border">

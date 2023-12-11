@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using LadderGameApp.Classes;
 
 namespace LadderGameApp.LadderControls
 {
@@ -20,11 +10,67 @@ namespace LadderGameApp.LadderControls
     /// </summary>
     public partial class LadderControl : UserControl
     {
+        int index;
+
+        private static bool isFull = true;
+
+        public static bool IsFull { get => isFull; set => isFull = value; }
+        public int Index { get => index; set => index = value; }
+
         public LadderControl()
         {
             InitializeComponent();
 
+        }
+        internal void StartGame()
+        {
+            NameBox.IsReadOnly = true;
+            NameBox.Cursor = Cursors.Hand;
+            ResultBox.IsReadOnly = true;
+
+            GamePage.IsStarted = true;
+
+            // IsFull = false;
 
         }
+        internal void LeaveGame()
+        {
+            NameBox.IsReadOnly = false;
+            ResultBox.IsReadOnly = false;
+
+            GamePage.IsStarted = false;
+        }
+
+
+        public event EventHandler<NameBoxMouseDownEventArgs> NameBoxMouseDown;
+        private void NameBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NameBoxMouseDown(sender, new NameBoxMouseDownEventArgs(Index));
+
+            if (GamePage.IsStarted)
+            {
+                User user = new User();
+
+                user.SelectIndex = NameBox.TabIndex;
+            }
+        }
+
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // GamePage.CheckTextBox();
+        }
+    }
+
+    public class NameBoxMouseDownEventArgs : EventArgs
+    {
+        private int index;
+
+        public NameBoxMouseDownEventArgs(int index)
+        {
+            this.Index = index;
+        }
+
+        public int Index { get => index; set => index = value; }
     }
 }

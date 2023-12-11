@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LadderGameApp.LadderControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="100">
+             d:DesignHeight="300" d:DesignWidth="80">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -25,16 +25,31 @@
             <Style TargetType="Line">
                 <Setter Property="Stroke" Value="Black" />
                 <Setter Property="StrokeThickness" Value="2" />
-                <Setter Property="Y2" Value="270" />
+                <Setter Property="Y2" Value="200" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="Grid.Row" Value="1" />
             </Style>
         </Grid.Resources>
-        <TextBox />
-        <StackPanel x:Name="LadderControlStackPanel" Grid.Row="1">
-        </StackPanel>
-        <Line />
+
+        <TextBox x:Name="NameBox" PreviewMouseLeftButtonDown="NameBox_PreviewMouseLeftButtonDown" TextChanged="TextBox_TextChanged"  />
+
+        <Grid x:Name="LadderControlGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
         
-        <TextBox Grid.Row="2" />
+        <Line />
+
+        <TextBox x:Name="ResultBox" Grid.Row="2" />
     </Grid>
 </UserControl>

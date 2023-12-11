@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace LadderGameApp
+namespace LadderGameApp.Classes
 {
     internal class Navigator
     {

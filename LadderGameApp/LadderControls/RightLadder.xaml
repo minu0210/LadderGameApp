@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LadderGameApp.LadderControls"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="100">
+             d:DesignHeight="20" d:DesignWidth="80">
     <Grid>
-        <Line X1="0" X2="0" Y1="0" Y2="20" HorizontalAlignment="Center" StrokeThickness="2" Stroke="Black" />
-        <Line X1="50" X2="100" Y1="10" Y2="10" HorizontalAlignment="Center" StrokeThickness="2" Stroke="Black" />
+        <Line X1="50" X2="100" Y1="10" Y2="10" HorizontalAlignment="Center" StrokeThickness="2" Stroke="black" />
     </Grid>
 </UserControl>

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Data;
 
-namespace LadderGameApp
+namespace LadderGameApp.Classes
 {
     public class User : Model.MainModel
     {
@@ -9,7 +9,7 @@ namespace LadderGameApp
         private string name;
         private int count = 2;
         private string result;
-        private int startIndex;
+        private int selectIndex;
 
         public string Name { get => name; set => name = value; }
         public int Count
@@ -26,7 +26,7 @@ namespace LadderGameApp
             }
         }
         public string Result { get => result; set => result = value; }
-        public int StartIndex { get => startIndex; set => startIndex = value; }
+        public int SelectIndex { get => selectIndex; set => selectIndex = value; }
 
     }
 }
