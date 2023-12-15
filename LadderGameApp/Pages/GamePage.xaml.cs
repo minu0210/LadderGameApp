@@ -1,9 +1,11 @@
 ﻿using LadderGameApp.Classes;
 using LadderGameApp.LadderControls;
 using System.Diagnostics;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -54,6 +56,15 @@ namespace LadderGameApp
             // 게임이 시작되었으며 애니메이션이 진행중이지 않으면 실행
             if (IsStarted && !animationNowPainting)
             {
+                Uri uri = new Uri(@"./Resources/BGM.wav", UriKind.Relative);
+                var mediaPlayer = new MediaPlayer();
+                mediaPlayer.MediaFailed += (o, args) =>
+                {
+                    Debug.WriteLine("Media Load Failed");
+                };
+                mediaPlayer.Open(uri);
+                mediaPlayer.Play();
+
                 Painter painter = new Painter();
                 LineCanvas.Children.Clear();
                 animationNowPainting = true;
@@ -64,6 +75,8 @@ namespace LadderGameApp
 
                     await Task.Delay(400);
                 }
+                //mediaPlayer.Stop();
+                mediaPlayer.Stop();
                 animationNowPainting = false;
             }
         }
@@ -100,7 +113,7 @@ namespace LadderGameApp
             // LadderControl의 TextBox의 Text가 null 또는 whitespace가 존재할 경우 실행
             if (LadderControl.TextBoxCheckContentList.Contains(false))
             {
-                MessageBox.Show("모든 입력창을 입력해야합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("모든 입력창을 입력해야합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             else
@@ -132,6 +145,7 @@ namespace LadderGameApp
         private void ResultButton_Click(object sender, RoutedEventArgs e)
         {
             Navigator.MovePage(NavigationService, new ResultPage());
+            isStarted = false;
         }
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

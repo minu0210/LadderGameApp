@@ -12,4 +12,10 @@
     <Compile Remove="App.xaml.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\BGM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
