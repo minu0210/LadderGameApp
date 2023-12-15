@@ -91,14 +91,14 @@ namespace LadderGameApp
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             // LadderControl의 TextBox 체크
-            LadderControl.CheckTextBoxContent.Clear();
+            LadderControl.TextBoxCheckContentList.Clear();
             foreach (var child in GameLadderPanel.Children)
             {
                 ((LadderControl)child).CheckTextBox();
             }
 
             // LadderControl의 TextBox의 Text가 null 또는 whitespace가 존재할 경우 실행
-            if (LadderControl.CheckTextBoxContent.Contains(false))
+            if (LadderControl.TextBoxCheckContentList.Contains(false))
             {
                 MessageBox.Show("모든 입력창을 입력해야합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;

@@ -13,12 +13,12 @@ namespace LadderGameApp.LadderControls
         private static List<string> nameList = new List<string>();
         private static List<string> resultList = new List<string>();
 
-        private static List<bool> checkTextBoxContent = new List<bool>();
+        private static List<bool> textBoxCheckContentList = new List<bool>();
 
         public int Index { get => index; set => index = value; }
         public static List<string> NameList { get => nameList; set => nameList = value; }
         public static List<string> ResultList { get => resultList; set => resultList = value; }
-        public static List<bool> CheckTextBoxContent { get => checkTextBoxContent; set => checkTextBoxContent = value; }
+        public static List<bool> TextBoxCheckContentList { get => textBoxCheckContentList; set => textBoxCheckContentList = value; }
 
         public LadderControl()
         {
@@ -55,7 +55,8 @@ namespace LadderGameApp.LadderControls
         }
         internal void CheckTextBox()
         {
-            CheckTextBoxContent.Add(string.IsNullOrWhiteSpace(NameBox.Text) ? false : true);
+            TextBoxCheckContentList.Add(string.IsNullOrWhiteSpace(NameBox.Text) ? false : true);
+            TextBoxCheckContentList.Add(string.IsNullOrWhiteSpace(ResultBox.Text) ? false : true);
         }
         private void NameBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
