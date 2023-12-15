@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>ladder.png</PackageIcon>
+    <RepositoryUrl>https://github.com/minu0210/LadderGameApp</RepositoryUrl>
+    <ApplicationIcon>Resources\ladder.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +17,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ladder.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\ladder.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Resources\BGM.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\ladder.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

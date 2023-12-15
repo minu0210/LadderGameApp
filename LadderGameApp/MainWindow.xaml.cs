@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace LadderGameApp
 {
@@ -10,6 +11,9 @@ namespace LadderGameApp
         public MainWindow()
         {
             InitializeComponent();
+
+            Uri iconUri = new Uri(@"./Resources/ladder.ico", UriKind.Relative);
+            Icon = BitmapFrame.Create(iconUri);
 
             Loaded += Window_Loaded;
         }
