@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="사다리타기" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button x:Name="MinusButton" Width="30" Height="30" Content="-">
+            <Button x:Name="MinusButton" Width="30" Height="30" Content="-" Visibility="Hidden">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20" />

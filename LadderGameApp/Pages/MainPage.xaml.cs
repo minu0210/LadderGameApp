@@ -27,29 +27,31 @@ namespace LadderGameApp
 
         private void MinusButton_Click(object sender, RoutedEventArgs e)
         {
+            ((UserInput)DataContext).LadderCount--;
+            UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+
             if (((UserInput)DataContext).LadderCount <= 2)
             {
-                MessageBox.Show("2 이상 20 이하의 수만 선택 가능합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
+                MinusButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                ((UserInput)DataContext).LadderCount--;
-                UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+                PlusButton.Visibility = Visibility.Visible;
             }
         }
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
+            ((UserInput)DataContext).LadderCount++;
+            UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+
             if (((UserInput)DataContext).LadderCount >= 20)
             {
-                MessageBox.Show("2 이상 20 이하의 수만 선택 가능합니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
+                PlusButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                ((UserInput)DataContext).LadderCount++;
-                UserCount.Text = ((UserInput)DataContext).LadderCount.ToString();
+                MinusButton.Visibility = Visibility.Visible;
             }
         }
     }
