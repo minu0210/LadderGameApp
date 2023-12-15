@@ -1,4 +1,5 @@
 ﻿using LadderGameApp.Classes;
+using LadderGameApp.LadderControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -36,11 +37,15 @@ namespace LadderGameApp
         {
             // 데이터 초기화 후 처음으로
             Navigator.MovePage(NavigationService, new MainPage());
+
+            LadderControl.NameList.Clear();
+            LadderControl.ResultList.Clear();
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // 데이터 보존 후 이전으로
             NavigationService.GoBack();
+            GamePage.IsStarted = true;
         }
     }
 }

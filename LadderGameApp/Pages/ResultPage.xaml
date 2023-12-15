@@ -17,7 +17,7 @@
 
         <TextBlock x:Name="ResultTitle" Text="전체 결과" Margin="0,24,0,0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" />
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto" Width="200">
-            <ListBox x:Name="ResultList" Width="200">
+            <ListBox x:Name="ResultList" Width="200" >
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalAlignment" Value="Center" />
