@@ -1,0 +1,36 @@
+﻿<Page x:Class="LadderGameApp.ResultPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ResultPage">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.6*" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock x:Name="ResultTitle" Text="전체 결과" Margin="0,24,0,0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" />
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto" Width="200">
+            <ListBox x:Name="ResultList" Width="200" >
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="Padding" Value="4" />
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
+        </ScrollViewer>
+
+        <StackPanel x:Name="ResultButtonPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button x:Name="MainButton" Width="100" Height="30" Cursor="Hand" Content="처음으로" Margin="0,0,30,0" />
+            <Button x:Name="BackButton" Width="100" Height="30" Cursor="Hand" Content="뒤로가기" />
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LadderGameApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="사다리타기" Height="450" Width="800" ResizeMode="NoResize" Icon="Resources/ladder.ico">
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="4" Margin="30">
-        <Grid x:Name="MainGrid">
+        <Grid x:Name="MainGrid" >
             <Frame x:Name="MainFr" NavigationUIVisibility="Hidden" />
         </Grid>
     </Border>

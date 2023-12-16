@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace LadderGameApp.Model
 {
+    // 사다리 개수의 따른 데이터 바인딩
     public class MainModel : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

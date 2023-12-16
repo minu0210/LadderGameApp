@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LadderGameApp.LadderControls
 {
@@ -20,9 +9,78 @@ namespace LadderGameApp.LadderControls
     /// </summary>
     public partial class LadderControl : UserControl
     {
+        private int index;
+        private static List<string> nameList = new List<string>();
+        private static List<string> resultList = new List<string>();
+
+        private static List<bool> textBoxCheckContentList = new List<bool>();
+
+        public int Index { get => index; set => index = value; }
+        public static List<string> NameList { get => nameList; set => nameList = value; }
+        public static List<string> ResultList { get => resultList; set => resultList = value; }
+        public static List<bool> TextBoxCheckContentList { get => textBoxCheckContentList; set => textBoxCheckContentList = value; }
+
         public LadderControl()
         {
             InitializeComponent();
+
+            NameBox.PreviewMouseLeftButtonDown += NameBox_PreviewMouseLeftButtonDown;
+            NameBox.TextChanged += TextBox_TextChanged;
+            ResultBox.TextChanged += TextBox_TextChanged;
+        }
+
+        internal void StartGame()
+        {
+            NameBox.IsReadOnly = true;
+            NameBox.BorderBrush = Brushes.LightSkyBlue;
+            NameBox.BorderThickness = new System.Windows.Thickness(2);
+            NameBox.Cursor = Cursors.Hand;
+
+            ResultBox.IsReadOnly = true;
+            ResultBox.Cursor = Cursors.Arrow;
+
+            GamePage.IsStarted = true;
+
+            NameList.Add(NameBox.Text);
+            ResultList.Add(ResultBox.Text);
+
+        }
+        internal void LeaveGame()
+        {
+            NameBox.IsReadOnly = false;
+            ResultBox.IsReadOnly = false;
+
+            GamePage.IsStarted = false;
+
+        }
+        internal void CheckTextBox()
+        {
+            TextBoxCheckContentList.Add(string.IsNullOrWhiteSpace(NameBox.Text) ? false : true);
+            TextBoxCheckContentList.Add(string.IsNullOrWhiteSpace(ResultBox.Text) ? false : true);
+        }
+        private void NameBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (GamePage.IsStarted)
+            {
+                NameBoxMouseDown(sender, new NameBoxMouseDownEventArgs(Index));
+            }
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            textBox.MaxLength = 10;
+        }
+        public event EventHandler<NameBoxMouseDownEventArgs> NameBoxMouseDown;
+
+        public class NameBoxMouseDownEventArgs : EventArgs
+        {
+            private int index;
+
+            public NameBoxMouseDownEventArgs(int index)
+            {
+                this.Index = index;
+            }
+            public int Index { get => index; set => index = value; }
         }
     }
 }
